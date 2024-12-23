@@ -41,13 +41,15 @@ The server provides a tool called `download_website` with the following paramete
 
 - `url` (required): The URL of the website to download
 - `outputPath` (optional): The directory where the website should be downloaded. Defaults to the current directory.
+- `depth` (optional): Maximum depth level for recursive downloading. Defaults to infinite. Set to 0 for just the specified page, 1 for direct links, etc.
 
 ### Example
 
 ```json
 {
   "url": "https://example.com",
-  "outputPath": "/path/to/output"
+  "outputPath": "/path/to/output",
+  "depth": 2  // Optional: Download up to 2 levels deep
 }
 ```
 

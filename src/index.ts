@@ -16,13 +16,15 @@ const execAsync = promisify(exec);
 interface DownloadWebsiteArgs {
   url: string;
   outputPath?: string;
+  depth?: number;
 }
 
 const isValidDownloadArgs = (args: any): args is DownloadWebsiteArgs =>
   typeof args === 'object' &&
   args !== null &&
   typeof args.url === 'string' &&
-  (args.outputPath === undefined || typeof args.outputPath === 'string');
+  (args.outputPath === undefined || typeof args.outputPath === 'string') &&
+  (args.depth === undefined || (typeof args.depth === 'number' && args.depth >= 0));
 
 class WebsiteDownloaderServer {
   private server: Server;
@@ -66,6 +68,11 @@ class WebsiteDownloaderServer {
                 type: 'string',
                 description: 'Path where the website should be downloaded (optional, defaults to current directory)',
               },
+              depth: {
+                type: 'number',
+                description: 'Maximum depth level for recursive downloading (optional, defaults to infinite)',
+                minimum: 0
+              }
             },
             required: ['url'],
           },
@@ -88,7 +95,7 @@ class WebsiteDownloaderServer {
         );
       }
 
-      const { url, outputPath = process.cwd() } = request.params.arguments;
+      const { url, outputPath = process.cwd(), depth } = request.params.arguments;
 
       try {
         // Check if wget is installed
@@ -110,7 +117,7 @@ class WebsiteDownloaderServer {
         const wgetCommand = [
           'wget',
           '--recursive',              // Download recursively
-          '--level=inf',             // Infinite recursion depth
+          `--level=${depth !== undefined ? depth : 'inf'}`,  // Recursion depth (infinite if not specified)
           '--page-requisites',       // Get all assets needed to display the page
           '--convert-links',         // Convert links to work locally
           '--adjust-extension',      // Add appropriate extensions to files
