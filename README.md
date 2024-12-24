@@ -2,6 +2,8 @@
 
 This MCP server provides a tool to download entire websites using wget. It preserves the website structure and converts links to work locally.
 
+<a href="https://glama.ai/mcp/servers/egcwr79vu2"><img width="380" height="200" src="https://glama.ai/mcp/servers/egcwr79vu2/badge" alt="Google Workspace Server MCP server" /></a>
+
 ## Prerequisites
 
 The server requires `wget` to be installed on your system.
