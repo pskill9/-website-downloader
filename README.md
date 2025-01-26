@@ -1,5 +1,6 @@
 # Website Downloader MCP Server
 
+[![smithery badge](https://smithery.ai/badge/@pskill9/website-downloader)](https://smithery.ai/server/@pskill9/website-downloader)
 This MCP server provides a tool to download entire websites using wget. It preserves the website structure and converts links to work locally.
 
 <a href="https://glama.ai/mcp/servers/egcwr79vu2"><img width="380" height="200" src="https://glama.ai/mcp/servers/egcwr79vu2/badge" alt="Google Workspace Server MCP server" /></a>
@@ -67,6 +68,15 @@ The website downloader:
 
 ## Installation
 
+### Installing via Smithery
+
+To install Website Downloader for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@pskill9/website-downloader):
+
+```bash
+npx -y @smithery/cli install @pskill9/website-downloader --client claude
+```
+
+### Installing Manually
 1. Build the server:
 ```bash
 npm install
@@ -83,3 +93,6 @@ npm run build
     }
   }
 }
+```
+
+
