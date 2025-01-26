@@ -1,0 +1,25 @@
+# Smithery configuration file: https://smithery.ai/docs/config#smitheryyaml
+
+startCommand:
+  type: stdio
+  configSchema:
+    # JSON Schema defining the configuration options for the MCP.
+    type: object
+    required:
+      - url
+    properties:
+      url:
+        type: string
+        description: The URL of the website to download
+      outputPath:
+        type: string
+        description: Directory to download the website into (optional, defaults to
+          current directory)
+      depth:
+        type: number
+        description: Maximum depth for recursive downloading (optional, defaults to
+          infinite)
+  commandFunction:
+    # A function that produces the CLI command to start the MCP on stdio.
+    |-
+    (config) => ({ command: 'node', args: ['build/index.js'], env: { } })
